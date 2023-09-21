@@ -1,0 +1,58 @@
+import { Selector } from 'testcafe';
+
+fixture`SDLMS Login Test`
+    .page`https://your-sdlms-url.com/login`; // Replace with your SDLMS login page URL
+
+test('User can log in successfully', async t => {
+    // Replace these with the appropriate selectors for your login page elements
+    const usernameInput = Selector('#username-input');
+    const passwordInput = Selector('#password-input');
+    const loginButton = Selector('#login-button');
+
+    // Replace with valid login credentials
+    const validUsername = 'your-username';
+    const validPassword = 'your-password';
+
+    // Fill in the username and password fields
+    await t
+        .typeText(usernameInput, validUsername)
+        .typeText(passwordInput, validPassword);
+
+    // Click the login button
+    await t.click(loginButton);
+
+    // Add assertions based on your application's behavior after successful login
+    // For example, you can check if a dashboard or profile page is displayed
+    // You may use Selectors to identify elements on the post-login page
+
+    // Example assertion: Check if the user's name is displayed after login
+    const userNameElement = Selector('.user-name-element');
+    await t.expect(userNameElement.exists).ok();
+
+    // Add more assertions as needed
+});
+
+test('User receives an error message for invalid login', async t => {
+    // Replace these with the appropriate selectors for your login page elements
+    const usernameInput = Selector('#username-input');
+    const passwordInput = Selector('#password-input');
+    const loginButton = Selector('#login-button');
+    const errorMessage = Selector('.error-message');
+
+    // Replace with invalid login credentials
+    const invalidUsername = 'invalid-username';
+    const invalidPassword = 'invalid-password';
+
+    // Fill in the username and password fields with invalid credentials
+    await t
+        .typeText(usernameInput, invalidUsername)
+        .typeText(passwordInput, invalidPassword);
+
+    // Click the login button
+    await t.click(loginButton);
+
+    // Add an assertion to check if an error message is displayed
+    await t.expect(errorMessage.exists).ok();
+
+    // Add more assertions as needed
+});
